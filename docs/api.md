@@ -760,6 +760,21 @@ Emitted when a dedicated [WebWorker](https://developer.mozilla.org/en-US/docs/We
 
 Emitted when a dedicated [WebWorker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) is terminated.
 
+#### event: 'screencastframe'
+- <[object]>
+    - `data` <[string]> Base64 encoded frame data.
+    - `metadata` <[object]>
+        - `offsetTop` <[number]>
+        - `pageScaleFactor` <[number]>
+        - `deviceWidth` <[number]>
+        - `deviceHeight` <[number]>
+        - `scrollOffsetX` <[number]>
+        - `scrollOffsetY` <[number]>
+        - `timestamp` <[number]>
+    - `sessionId` <[number]> The ID of the session this frame is from.
+
+Emitted when a [response] is received.
+
 #### page.$(selector)
 - `selector` <[string]> A [selector] to query page for
 - returns: <[Promise]<?[ElementHandle]>>
@@ -1318,6 +1333,10 @@ Shortcut for [page.mainFrame().executionContext().queryObjects(prototypeHandle)]
     - `networkidle0` - consider navigation to be finished when there are no more than 0 network connections for at least `500` ms.
     - `networkidle2` - consider navigation to be finished when there are no more than 2 network connections for at least `500` ms.
 - returns: <[Promise]<[Response]>> Promise which resolves to the main resource response. In case of multiple redirects, the navigation will resolve with the response of the last redirect.
+
+#### page.screencastFrameAck(sessionId)
+- `sessionId` <[number]> The sessionId of the frame that is being acknowledge. Provided in the `screencastframe` event.
+- returns: <[Promise]>
 
 #### page.screenshot([options])
 - `options` <[Object]> Options object which might have the following properties:
